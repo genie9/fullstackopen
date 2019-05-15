@@ -36,34 +36,31 @@ const Total = (props) => {
 }
 
 const App = () => {  
-  const course = 'Half Stack -sovelluskehitys'
-  const parts = [
-    {
-      name: 'Reactin perusteet',
-      exercises: 10
-    },
-    {
-      name: 'Tiedonvälitys propseilla',
-      exercises: 7
-    },
-    {
-      name: 'Komponenttien tila',
-      exercises: 14
-    }
-  ]
-  parts.forEach(element => {
-    console.log(element.name, element.exercises)})
+  const course = {
+    name: 'Half Stack -sovelluskehitys',
+    parts: [
+      {
+        name: 'Reactin perusteet',
+        exercises: 10
+      },
+      {
+        name: 'Tiedonvälitys propseilla',
+        exercises: 7
+      },
+      {
+        name: 'Komponenttien tila',
+        exercises: 14
+      }
+    ]
+  }
+  course.parts.forEach(part => {
+    console.log(part.name, part.exercises)})
 
   return (
     <>
-      <Header course={course} />
-      <Content
-        parts={parts}
-        // name0={parts[0].name} exercises0={parts[0].exercises} 
-        // name1={parts[1].name} exercises1={parts[1].exercises} 
-        // name2={parts[2].name} exercises2={parts[2].exercises}
-        />
-      <Total parts={parts} />
+      <Header course={course.name} />
+      <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </>
   )
 }
