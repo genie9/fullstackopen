@@ -40,6 +40,9 @@ const App = () => {
       <Stats text={'hyvä'} stats={good} />
       <Stats text={'neutraali'} stats={neutral} />
       <Stats text={'huono'} stats={bad} />
+      <Stats text={'yhteensä'} stats={good+neutral+bad} />
+      <Stats text={'keskiarvo'} stats={(good-bad)/(good+neutral+bad)} />
+      <Stats text={'positiivisia'} stats={100*good/(good+neutral+bad)} />
     </div>
   )
 }
