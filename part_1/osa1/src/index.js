@@ -14,10 +14,23 @@ const Stats = ({text, stats}) => (
   <p>{text} {stats}</p>
 )
 
+const Statistics = ({good, neutral, bad}) => {
+  return(<>
+    <Stats text={'hyvä'} stats={good} />
+    <Stats text={'neutraali'} stats={neutral} />
+    <Stats text={'huono'} stats={bad} />
+    <Stats text={'yhteensä'} stats={good+neutral+bad} />
+    <Stats text={'keskiarvo'} stats={(good-bad)/(good+neutral+bad)} />
+    <Stats text={'positiivisia'} stats={`${100*good/(good+neutral+bad)} %`} />
+  </>
+  )
+}
+
 const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+  const all = useState(0)
 
   const addToGood = (newValue) => () => {
     setGood(newValue)
@@ -37,12 +50,7 @@ const App = () => {
       <Button handleClick={addToBad(bad+1)} text='bad' />
       
       <Header text={'Statistiikka'} />
-      <Stats text={'hyvä'} stats={good} />
-      <Stats text={'neutraali'} stats={neutral} />
-      <Stats text={'huono'} stats={bad} />
-      <Stats text={'yhteensä'} stats={good+neutral+bad} />
-      <Stats text={'keskiarvo'} stats={(good-bad)/(good+neutral+bad)} />
-      <Stats text={'positiivisia'} stats={100*good/(good+neutral+bad)} />
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   )
 }
