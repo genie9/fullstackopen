@@ -1,30 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import ReactDOM from 'react-dom'
 
 
-const Button = ({handleClick}) => (
-  <button onClick={handleClick}>next anecdote</button>
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>{text}</button>
 )
 
 const App = (props) => {
   const [selected, setSelected] = useState(0)
-
+  const [votes, setVotes] = useState(new Array(props.anecdotes.length).fill(0))
+  console.log(selected, votes)
   const random = max => Math.floor(Math.random() * max)
 
-  
   const pickAnecdot = (max) => () => {
     const n = random(max)
     setSelected(n)
   }
-  
+
+  const addToVotes = (selected) => () => {
+    const copy = [...votes]
+    //console.log(copy)
+    copy[selected] += 1
+    setVotes(copy)
+  }
+
+  // useEffect(() => {
+  //   document.title = `Has ${votes[selected]} votes`;
+  // });
+
   return (
     <div>
       <p>{props.anecdotes[selected]}</p>
-      <Button handleClick={pickAnecdot(props.anecdotes.length)} />
+      <p>has {votes[selected]} votes</p>
+      <Button handleClick={addToVotes(selected)} text={'vote'} />
+      <Button handleClick={pickAnecdot(props.anecdotes.length)} text={'next anecdote'} />
     </div>
   )
 }
-
 
 const anecdotes = [
   'If it hurts, do it more often',
